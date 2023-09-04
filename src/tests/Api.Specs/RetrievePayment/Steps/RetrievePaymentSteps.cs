@@ -62,7 +62,7 @@ public class RetrievePaymentSteps
         {
             Title = "Payment not found",
             Type = "https://httpstatuses.com/404",
-            Instance = $"/payments/{NonExistingPaymentId}",
+            Instance = $"/v1/payments/{NonExistingPaymentId}",
             Detail = "No payment record can be found with the given id",
             Status = StatusCodes.Status404NotFound,
         };
@@ -72,5 +72,5 @@ public class RetrievePaymentSteps
         problemDetails.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(details => details.Extensions));
     }
 
-    private Task GetPaymentDetails(string paymentId) => _httpClient.Get($"/payments/{paymentId}");
+    private Task GetPaymentDetails(string paymentId) => _httpClient.Get($"/v1/payments/{paymentId}");
 }

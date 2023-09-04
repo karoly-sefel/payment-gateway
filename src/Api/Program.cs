@@ -1,3 +1,5 @@
+using Asp.Versioning;
+using Asp.Versioning.Builder;
 using Checkout.PaymentGateway.Api.Endpoints;
 using Checkout.PaymentGateway.Api.OpenApi;
 using Checkout.PaymentGateway.Application;
@@ -10,18 +12,33 @@ builder.Services.AddInfrastructureLayer();
 
 builder.Services.AddProblemDetails();
 builder.Services.AddOpenApi();
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1);
+    options.ReportApiVersions = true;
+}).AddApiExplorer(options =>
+{
+    options.SubstituteApiVersionInUrl = true;
+    options.GroupNameFormat = "'v'V";
+});
 
 var app = builder.Build();
 
 app.UseExceptionHandler();
 app.UseStatusCodePages();
 
+
+IVersionedEndpointRouteBuilder versionedApi = app
+    .NewVersionedApi()
+    .HasApiVersion(1);
+
 app.UseOpenApi();
 
-app.MapGet("/", () => "Payment Gateway API")
+versionedApi.MapGet("/", () => "Payment Gateway API")
+    .IsApiVersionNeutral()
     .ExcludeFromDescription();
 
-app.MapRetrievePaymentEndpoint();
+versionedApi.MapRetrievePaymentEndpoint();
 
 app.Run();
 

@@ -1,3 +1,4 @@
+using Asp.Versioning.Builder;
 using Checkout.PaymentGateway.Api.Endpoints.Examples;
 using Checkout.PaymentGateway.Application.Payments.Queries;
 using Microsoft.AspNetCore.Mvc;
@@ -9,8 +10,8 @@ namespace Checkout.PaymentGateway.Api.Endpoints;
 
 public static class RetrievePaymentEndpoint
 {
-    public static void MapRetrievePaymentEndpoint(this WebApplication app) =>
-        app.MapGet("/payments/{id}", Handle)
+    public static void MapRetrievePaymentEndpoint(this IVersionedEndpointRouteBuilder app) =>
+        app.MapGet("/v{version:apiVersion}/payments/{id}", Handle)
             .WithSummary("Retrieve a payment by id")
             .WithTags("Payments")
             .Produces<PaymentDto>()

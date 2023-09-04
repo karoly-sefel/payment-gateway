@@ -1,8 +1,8 @@
 ### Retreive payment - existing
 
-GET {{baseUrl}}/payments/abc1234
+GET {{baseUrl}}/v1/payments/abc1234
 
 ### Retreive payment - non-existing
 
-GET {{baseUrl}}/payments/aaaa1234
+GET {{baseUrl}}/v1/payments/aaaa1234
 

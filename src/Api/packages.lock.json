@@ -2,6 +2,24 @@
   "version": 1,
   "dependencies": {
     "net7.0": {
+      "Asp.Versioning.Http": {
+        "type": "Direct",
+        "requested": "[7.0.1, )",
+        "resolved": "7.0.1",
+        "contentHash": "cvSrKDiszPbvSxEuC9SN9rwl1DOtXDU9TsSwNK3RzvyVhFcHdu4J0p8qaC8b8tuY/9ST4DsRN92L1HDUeTWFaQ==",
+        "dependencies": {
+          "Asp.Versioning.Abstractions": "7.0.0"
+        }
+      },
+      "Asp.Versioning.Mvc.ApiExplorer": {
+        "type": "Direct",
+        "requested": "[7.0.1, )",
+        "resolved": "7.0.1",
+        "contentHash": "p7NXzeu6j3+LIx2zQPnVkpWpQIV1kAP2bewI+jt4J6twPNobn2tnJpE9EQ2gzRXkHXcx7QKjucOIyJIfIr4yPg==",
+        "dependencies": {
+          "Asp.Versioning.Mvc": "7.0.1"
+        }
+      },
       "Microsoft.AspNetCore.OpenApi": {
         "type": "Direct",
         "requested": "[7.0.10, )",
@@ -40,6 +58,22 @@
           "Scrutor": "3.3.0",
           "Swashbuckle.AspNetCore.Filters.Abstractions": "7.0.8",
           "Swashbuckle.AspNetCore.SwaggerGen": "5.0.0"
+        }
+      },
+      "Asp.Versioning.Abstractions": {
+        "type": "Transitive",
+        "resolved": "7.0.0",
+        "contentHash": "yujGpbGBCViHvYiBJD0S5XFgOI+f5bGvi8tnfMJV6EC0b8SAqBn1YC+yCnJjQo3D2XP9TmSuKIJ7ofVy58GcuQ==",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "7.0.0"
+        }
+      },
+      "Asp.Versioning.Mvc": {
+        "type": "Transitive",
+        "resolved": "7.0.1",
+        "contentHash": "BaYDuPI2/AapkgpuLzu5wgmeGcbs4Xur7YB30GgmvCa5RyVuuqmYSH+nAcd3WohrP0gES+M7covn6TNHjanL7g==",
+        "dependencies": {
+          "Asp.Versioning.Http": "7.0.1"
         }
       },
       "CSharpFunctionalExtensions": {
@@ -91,6 +125,11 @@
         "type": "Transitive",
         "resolved": "7.0.1",
         "contentHash": "pkeBFx0vqMW/A3aUVHh7MPu3WkBhaVlezhSZeb1c9XD0vUReYH1TLFSy5MxJgZfmz5LZzYoErMorlYZiwpOoNA=="
+      },
+      "Microsoft.Extensions.Primitives": {
+        "type": "Transitive",
+        "resolved": "7.0.0",
+        "contentHash": "um1KU5kxcRp3CNuI8o/GrZtD4AIOXDk+RLsytjZ9QPok3ttLUelLKpilVPuaFT3TFjOhSibUAso0odbOaCDj3Q=="
       },
       "Scrutor": {
         "type": "Transitive",
