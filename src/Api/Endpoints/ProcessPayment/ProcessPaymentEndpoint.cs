@@ -1,6 +1,7 @@
 using Asp.Versioning.Builder;
 using Checkout.PaymentGateway.Api.Endpoints.Examples;
 using Checkout.PaymentGateway.Application.Payments.Commands;
+using Checkout.PaymentGateway.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Filters;
 using IResult = Microsoft.AspNetCore.Http.IResult;
@@ -21,11 +22,11 @@ public static class ProcessPaymentEndpoint
     [SwaggerRequestExample(typeof(PaymentRequest), typeof(ProcessPaymentRequest201Example))]
     private static async Task<IResult> Handle([FromBody]PaymentRequest paymentRequest, [FromServices]IMediator mediator, HttpContext httpContext, CancellationToken cancelToken)
     {
-        Result<ProcessPaymentResponse, Exception> result = await mediator.Send(new ProcessPaymentCommand(paymentRequest), cancelToken);
+        Result<ProcessPaymentResponse, PaymentError> result = await mediator.Send(new ProcessPaymentCommand(paymentRequest), cancelToken);
 
         return result.Match(
             response => Results.Created($"/v1/payments/{response.PaymentId}", response),
-            ex => Results.Conflict()
+            error => Results.UnprocessableEntity(error.Reason)
         );
     }
 }

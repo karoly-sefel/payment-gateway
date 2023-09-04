@@ -1,3 +1,5 @@
-﻿namespace Checkout.PaymentGateway.Application.Payments.Commands;
+﻿using Checkout.PaymentGateway.Domain.Entities;
 
-public record ProcessPaymentCommand(PaymentRequest PaymentRequest) : IRequest<Result<ProcessPaymentResponse, Exception>>;
+namespace Checkout.PaymentGateway.Application.Payments.Commands;
+
+public record ProcessPaymentCommand(PaymentRequest PaymentRequest) : IRequest<Result<ProcessPaymentResponse, PaymentError>>;

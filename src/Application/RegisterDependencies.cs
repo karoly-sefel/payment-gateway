@@ -1,4 +1,5 @@
 using System.Reflection;
+using Checkout.PaymentGateway.Application.AcquiringBank;
 using Checkout.PaymentGateway.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,5 +14,7 @@ public static class RegisterDependencies
         );
 
         services.AddScoped<IPaymentIdGenerator, PaymentIdGenerator>();
+
+        services.AddScoped<IAcquiringBankClient, AcquiringBankClient>();
     }
 }

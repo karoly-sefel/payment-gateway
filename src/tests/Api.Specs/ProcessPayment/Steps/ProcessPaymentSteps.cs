@@ -1,6 +1,8 @@
+using System.Net;
 using Checkout.PaymentGateway.Api.Specs.Fakes;
 using Checkout.PaymentGateway.Api.Specs.Http;
 using Checkout.PaymentGateway.Application.Payments.Commands;
+using RichardSzalay.MockHttp;
 using TechTalk.SpecFlow;
 
 namespace Checkout.PaymentGateway.Api.Specs.Steps;
@@ -9,10 +11,31 @@ namespace Checkout.PaymentGateway.Api.Specs.Steps;
 public class ProcessPaymentSteps
 {
     private readonly HttpClientContext _httpClient;
-    private readonly SequentialPaymentIdGenerator _idGenerator;
 
-    public ProcessPaymentSteps(HttpClientContext httpClient, SequentialPaymentIdGenerator idGenerator) =>
-        (_httpClient, _idGenerator) = (httpClient, idGenerator);
+    private readonly SequentialPaymentIdGenerator _idGenerator;
+    private readonly MockHttpMessageHandler _http;
+
+    public ProcessPaymentSteps(HttpClientContext httpClient, SequentialPaymentIdGenerator idGenerator, MockHttpMessageHandler http) =>
+        (_httpClient, _idGenerator, _http) = (httpClient, idGenerator, http);
+
+    [Given(@"a customer")]
+    public void GivenACustomer()
+    {
+    }
+
+    [Given(@"the customer has insufficient balance on their credit card for the payment")]
+    public void GivenTheCustomerHasInsufficientBalanceOnTheirCreditCardForThePayment()
+    {
+        _http.When(HttpMethod.Post, "/take-payment")
+            .Respond(_ => new HttpResponseMessage(HttpStatusCode.UnprocessableEntity));
+    }
+
+    [Given(@"the customer has sufficient balance on their credit card for the payment")]
+    public void GivenTheCustomerHasSufficientBalanceOnTheirCreditCardForThePayment()
+    {
+        _http.When(HttpMethod.Post, "/take-payment")
+            .Respond(_ => new HttpResponseMessage(HttpStatusCode.OK));
+    }
 
     [When(@"a request is made to the ProcessPayment endpoint")]
     public async Task WhenARequestIsMadeToTheProcessPaymentEndpoint() =>
