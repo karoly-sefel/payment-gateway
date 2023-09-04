@@ -5,4 +5,8 @@
         <AssemblyName>$(RootNamespace)</AssemblyName>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Application\Application.csproj" />
+    </ItemGroup>
+
 </Project>

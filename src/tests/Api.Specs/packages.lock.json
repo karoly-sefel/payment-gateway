@@ -44,10 +44,39 @@
         "resolved": "2.4.5",
         "contentHash": "OwHamvBdUKgqsXfBzWiCW/O98BTx81UKzx2bieIOQI7CZFE5NEQZGi8PBQGIKawDW96xeRffiNf20SjfC0x9hw=="
       },
+      "CSharpFunctionalExtensions": {
+        "type": "Transitive",
+        "resolved": "2.40.0",
+        "contentHash": "Xo3BSUMuRCSp4/SeTn0G/ZgahCNXzrh28gprzYpqPPKisDbXqGQeDumhnrlhUSMHVyatXJniezuO7W8vPHt3Ww=="
+      },
+      "MediatR": {
+        "type": "Transitive",
+        "resolved": "12.1.1",
+        "contentHash": "1AbwzzeS6gn4NdcO6A9LfKS5TXXgAiUQM3J18dREHa7O7TrdCXJ5dNFeRBpzPZY7UWl5Kby+n9pWrPJe3SDiMA==",
+        "dependencies": {
+          "MediatR.Contracts": "[2.0.1, 3.0.0)",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0"
+        }
+      },
+      "MediatR.Contracts": {
+        "type": "Transitive",
+        "resolved": "2.0.1",
+        "contentHash": "FYv95bNT4UwcNA+G/J1oX5OpRiSUxteXaUt2BJbRSdRNiIUNbggJF69wy6mnk2wYToaanpdXZdCwVylt96MpwQ=="
+      },
       "Microsoft.CodeCoverage": {
         "type": "Transitive",
         "resolved": "17.5.0",
         "contentHash": "6FQo0O6LKDqbCiIgVQhJAf810HSjFlOj7FunWaeOGDKxy8DAbpHzPk4SfBTXz9ytaaceuIIeR6hZgplt09m+ig=="
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "xlzi2IYREJH3/m6+lUrQlujzX8wDitm4QGnUu6kUXTQAWPuZY8i+ticFJbzfqaetLA6KR/rO6Ew/HuYD+bxifg=="
+      },
+      "Microsoft.Extensions.Logging.Abstractions": {
+        "type": "Transitive",
+        "resolved": "7.0.1",
+        "contentHash": "pkeBFx0vqMW/A3aUVHh7MPu3WkBhaVlezhSZeb1c9XD0vUReYH1TLFSy5MxJgZfmz5LZzYoErMorlYZiwpOoNA=="
       },
       "Microsoft.NETCore.Platforms": {
         "type": "Transitive",
@@ -1036,6 +1065,31 @@
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "xunit.extensibility.core": "[2.4.2]"
+        }
+      },
+      "Checkout.PaymentGateway.Api": {
+        "type": "Project",
+        "dependencies": {
+          "Checkout.PaymentGateway.Application": "[1.0.0, )",
+          "Checkout.PaymentGateway.Infrastructure": "[1.0.0, )"
+        }
+      },
+      "Checkout.PaymentGateway.Application": {
+        "type": "Project",
+        "dependencies": {
+          "CSharpFunctionalExtensions": "[2.40.0, )",
+          "Checkout.PaymentGateway.Domain": "[1.0.0, )",
+          "MediatR": "[12.1.1, )",
+          "Microsoft.Extensions.Logging.Abstractions": "[7.0.1, )"
+        }
+      },
+      "Checkout.PaymentGateway.Domain": {
+        "type": "Project"
+      },
+      "Checkout.PaymentGateway.Infrastructure": {
+        "type": "Project",
+        "dependencies": {
+          "Checkout.PaymentGateway.Application": "[1.0.0, )"
         }
       }
     }
