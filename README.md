@@ -17,3 +17,4 @@ For detailed information about project requirements and development guidelines, 
 
 - [Requirements](docs/requirements.md)
 - [Development](docs/development.md)
+- [API Documentation](docs/api-documentation.md)
