@@ -1,9 +1,11 @@
 obj/
 bin/
 *.user
+*.feature.cs
 
 .idea
 !.idea/.name
 !.idea/indexLayout.xml
 
 test-results/
+
