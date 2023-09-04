@@ -1,4 +1,6 @@
 using System.Net;
+using System.Net.Http.Headers;
+using System.Text.Json;
 using TechTalk.SpecFlow;
 
 namespace Checkout.PaymentGateway.Api.Specs.Http;
@@ -28,4 +30,17 @@ public class HttpClientContext
     }
 
     public Task<T> GetLatestResponse<T>() where T : class => LatestResponseMessage.AsJson<T>();
+
+    public async Task<HttpResponseMessage> Post<T>(string url, T payload)
+    {
+        var json = new StringContent(JsonSerializer.Serialize(payload), mediaType: new MediaTypeHeaderValue("application/json"));
+
+        var response = await _httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, url)
+        {
+            Content = json,
+        });
+
+        _responses.Add(response);
+        return response;
+    }
 }

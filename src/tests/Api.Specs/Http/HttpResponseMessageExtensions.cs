@@ -6,8 +6,6 @@ namespace Checkout.PaymentGateway.Api.Specs.Http;
 
 public static class HttpResponseMessageExtensions
 {
-    private static readonly JsonSerializerOptions JsonSerializerOptions = new(JsonSerializerDefaults.Web);
-
     public static Task<string> AsString(this HttpResponseMessage? response)
     {
         HttpContent httpContent = response.GetContentOrThrow();
@@ -20,7 +18,7 @@ public static class HttpResponseMessageExtensions
 
         string json = await httpContent.ReadAsStringAsync();
         StringContent clone = new StringContent(json);
-        T? obj = await clone.ReadFromJsonAsync<T>(JsonSerializerOptions);
+        T? obj = await clone.ReadFromJsonAsync<T>(DefaultJsonSerializerOptions.Options);
 
         Guard.Against.Null(obj, "Cannot convert response body to {typeof(T)}");
 

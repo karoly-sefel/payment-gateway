@@ -1,4 +1,5 @@
 using System.Reflection;
+using Checkout.PaymentGateway.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Checkout.PaymentGateway.Application;
@@ -10,5 +11,7 @@ public static class RegisterDependencies
         services.AddMediatR(config =>
             config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly())
         );
+
+        services.AddScoped<IPaymentIdGenerator, PaymentIdGenerator>();
     }
 }

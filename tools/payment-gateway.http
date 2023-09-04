@@ -6,3 +6,16 @@ GET {{baseUrl}}/v1/payments/abc1234
 
 GET {{baseUrl}}/v1/payments/aaaa1234
 
+### Process payment
+
+POST {{baseUrl}}/v1/payments
+Content-Type: application/json
+
+{
+    "cardNumber": "4242424242424242",
+    "expiryMonth": 8,
+    "expiryYear": 2025,
+    "amount": 102400,
+    "currency": "GBP",
+    "cvv": "123"
+}

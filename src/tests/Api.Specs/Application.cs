@@ -2,6 +2,7 @@
 using Checkout.PaymentGateway.Api.Specs.Context;
 using Checkout.PaymentGateway.Api.Specs.Fakes;
 using Checkout.PaymentGateway.Application.Payments.Queries;
+using Checkout.PaymentGateway.Application.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -23,6 +24,7 @@ public class Application : WebApplicationFactory<Program>
         builder.ConfigureTestServices(services =>
         {
             services.Replace(ServiceDescriptor.Singleton<IPaymentRepository, FakePaymentRepository>());
+            services.Replace(ServiceDescriptor.Singleton<IPaymentIdGenerator>(_ => _objectContainer.Resolve<SequentialPaymentIdGenerator>()));
             services.AddTransient(_ => _objectContainer.Resolve<PaymentContext>());
         });
 

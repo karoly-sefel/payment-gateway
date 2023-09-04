@@ -485,6 +485,11 @@
           "System.Runtime": "4.3.0"
         }
       },
+      "Nanoid": {
+        "type": "Transitive",
+        "resolved": "3.0.0",
+        "contentHash": "TXFA+/K8CTID49Qn7upRKh1HK37GpLYh2EEKNvTTVo34G9AjorRrHYkhad5xeSxxlebvxAJJGs0lddQ706kjEQ=="
+      },
       "NETStandard.Library": {
         "type": "Transitive",
         "resolved": "1.6.1",
@@ -1592,7 +1597,8 @@
           "CSharpFunctionalExtensions": "[2.40.0, )",
           "Checkout.PaymentGateway.Domain": "[1.0.0, )",
           "MediatR": "[12.1.1, )",
-          "Microsoft.Extensions.Logging.Abstractions": "[7.0.1, )"
+          "Microsoft.Extensions.Logging.Abstractions": "[7.0.1, )",
+          "Nanoid": "[3.0.0, )"
         }
       },
       "Checkout.PaymentGateway.Domain": {

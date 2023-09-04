@@ -39,6 +39,7 @@ versionedApi.MapGet("/", () => "Payment Gateway API")
     .ExcludeFromDescription();
 
 versionedApi.MapRetrievePaymentEndpoint();
+versionedApi.MapProcessPaymentEndpoint();
 
 app.Run();
 

@@ -31,13 +31,19 @@
         "resolved": "7.0.1",
         "contentHash": "pkeBFx0vqMW/A3aUVHh7MPu3WkBhaVlezhSZeb1c9XD0vUReYH1TLFSy5MxJgZfmz5LZzYoErMorlYZiwpOoNA=="
       },
+      "Nanoid": {
+        "type": "Transitive",
+        "resolved": "3.0.0",
+        "contentHash": "TXFA+/K8CTID49Qn7upRKh1HK37GpLYh2EEKNvTTVo34G9AjorRrHYkhad5xeSxxlebvxAJJGs0lddQ706kjEQ=="
+      },
       "Checkout.PaymentGateway.Application": {
         "type": "Project",
         "dependencies": {
           "CSharpFunctionalExtensions": "[2.40.0, )",
           "Checkout.PaymentGateway.Domain": "[1.0.0, )",
           "MediatR": "[12.1.1, )",
-          "Microsoft.Extensions.Logging.Abstractions": "[7.0.1, )"
+          "Microsoft.Extensions.Logging.Abstractions": "[7.0.1, )",
+          "Nanoid": "[3.0.0, )"
         }
       },
       "Checkout.PaymentGateway.Domain": {
