@@ -1,4 +1,7 @@
 using System.Net;
+using Checkout.PaymentGateway.Api.Authorization;
+using Checkout.PaymentGateway.Api.Specs.Authentication;
+using Checkout.PaymentGateway.Api.Specs.Context;
 using Checkout.PaymentGateway.Api.Specs.Fakes;
 using Checkout.PaymentGateway.Api.Specs.Http;
 using Checkout.PaymentGateway.Application.Payments.Commands;
@@ -14,9 +17,10 @@ public class ProcessPaymentSteps
 
     private readonly SequentialPaymentIdGenerator _idGenerator;
     private readonly MockHttpMessageHandler _http;
+    private readonly PaymentContext _paymentContext;
 
-    public ProcessPaymentSteps(HttpClientContext httpClient, SequentialPaymentIdGenerator idGenerator, MockHttpMessageHandler http) =>
-        (_httpClient, _idGenerator, _http) = (httpClient, idGenerator, http);
+    public ProcessPaymentSteps(HttpClientContext httpClient, PaymentContext context, SequentialPaymentIdGenerator idGenerator, MockHttpMessageHandler http) =>
+        (_httpClient, _paymentContext, _idGenerator, _http) = (httpClient, context, idGenerator, http);
 
     [Given(@"a customer")]
     public void GivenACustomer()
@@ -56,5 +60,6 @@ public class ProcessPaymentSteps
     }
 
     private Task ProcessPayment(PaymentRequest request) =>
-        _httpClient.Post("/v1/payments", request);
+        _httpClient.Post("/v1/payments", request,
+            bearerToken: JwtTokenGenerator.GenerateToken(_paymentContext.MerchantId, new []{ Scopes.PaymentProcess }));
 }

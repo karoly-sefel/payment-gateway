@@ -30,6 +30,11 @@
         "resolved": "3.0.0",
         "contentHash": "TXFA+/K8CTID49Qn7upRKh1HK37GpLYh2EEKNvTTVo34G9AjorRrHYkhad5xeSxxlebvxAJJGs0lddQ706kjEQ=="
       },
+      "Ardalis.GuardClauses": {
+        "type": "Transitive",
+        "resolved": "4.1.1",
+        "contentHash": "+UcJ2s+gf2wMNrwadCaHZV2DMcGgBU1t22A+jm40P4MHQRLy9hcleGy5xdVWd4dXZPa5Vlp4TG5xU2rhoDYrBA=="
+      },
       "MediatR.Contracts": {
         "type": "Transitive",
         "resolved": "2.0.1",
@@ -41,7 +46,10 @@
         "contentHash": "xlzi2IYREJH3/m6+lUrQlujzX8wDitm4QGnUu6kUXTQAWPuZY8i+ticFJbzfqaetLA6KR/rO6Ew/HuYD+bxifg=="
       },
       "Checkout.PaymentGateway.Domain": {
-        "type": "Project"
+        "type": "Project",
+        "dependencies": {
+          "Ardalis.GuardClauses": "[4.1.1, )"
+        }
       }
     }
   }

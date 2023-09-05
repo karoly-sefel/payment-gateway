@@ -12,11 +12,11 @@ public class FakePaymentRepository : IPaymentRepository
 
     public FakePaymentRepository(PaymentContext context) => _context = context;
 
-    public Task<Maybe<PaymentDto>> GetById(PaymentId paymentId, CancellationToken cancellationToken)
+    public Task<Maybe<PaymentDto>> GetById(PaymentId paymentId, MerchantId merchantId, CancellationToken cancellationToken)
     {
         Maybe<PaymentDto> payment = None;
 
-        if (_context.CurrentPayment?.PaymentId == paymentId.Value)
+        if (_context.CurrentPayment?.PaymentId == paymentId.Value && _context.MerchantId == merchantId.Value)
             payment = _context.CurrentPayment;
 
         return Task.FromResult(payment);

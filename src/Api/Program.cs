@@ -1,6 +1,8 @@
 using Asp.Versioning;
 using Asp.Versioning.Builder;
+using Checkout.PaymentGateway.Api.Authorization;
 using Checkout.PaymentGateway.Api.Endpoints;
+using Checkout.PaymentGateway.Api.Merchants;
 using Checkout.PaymentGateway.Api.OpenApi;
 using Checkout.PaymentGateway.Application;
 using Checkout.PaymentGateway.Infrastructure;
@@ -9,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationLayer();
 builder.Services.AddInfrastructureLayer();
+
+builder.Services.AddScoped<MerchantIdAccessor>();
 
 builder.Services.AddProblemDetails();
 builder.Services.AddOpenApi();
@@ -22,11 +26,16 @@ builder.Services.AddApiVersioning(options =>
     options.GroupNameFormat = "'v'V";
 });
 
+builder.Services.AddJwtAuthentication(builder.Configuration);
+builder.Services.AddMerchantAuthorization();
+
 var app = builder.Build();
 
 app.UseExceptionHandler();
 app.UseStatusCodePages();
 
+app.UseAuthentication();
+app.UseAuthorization();
 
 IVersionedEndpointRouteBuilder versionedApi = app
     .NewVersionedApi()

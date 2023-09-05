@@ -100,6 +100,19 @@
         "resolved": "2.0.1",
         "contentHash": "FYv95bNT4UwcNA+G/J1oX5OpRiSUxteXaUt2BJbRSdRNiIUNbggJF69wy6mnk2wYToaanpdXZdCwVylt96MpwQ=="
       },
+      "Microsoft.AspNetCore.Authentication.JwtBearer": {
+        "type": "Transitive",
+        "resolved": "7.0.10",
+        "contentHash": "8/GWtq034kzrDapCHYbAnnJXIYAJzFcJoXP5OtlbjIWBQBLxEbstRv3N4DJAvlcGUXxy0DmmNVDiSlFAY8HpWw==",
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.15.1"
+        }
+      },
+      "Microsoft.CSharp": {
+        "type": "Transitive",
+        "resolved": "4.5.0",
+        "contentHash": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ=="
+      },
       "Microsoft.Extensions.ApiDescription.Server": {
         "type": "Transitive",
         "resolved": "6.0.5",
@@ -183,6 +196,47 @@
         "resolved": "7.0.0",
         "contentHash": "um1KU5kxcRp3CNuI8o/GrZtD4AIOXDk+RLsytjZ9QPok3ttLUelLKpilVPuaFT3TFjOhSibUAso0odbOaCDj3Q=="
       },
+      "Microsoft.IdentityModel.JsonWebTokens": {
+        "type": "Transitive",
+        "resolved": "6.15.1",
+        "contentHash": "X5K/Pt02agb1V+khh5u7Q8hg02IVTshxV5owpR7UdQ9zfs0+A6qzca0F9jyv3o8SlOjEFHBabs+5cp7Noofzvg==",
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "6.15.1"
+        }
+      },
+      "Microsoft.IdentityModel.Logging": {
+        "type": "Transitive",
+        "resolved": "6.15.1",
+        "contentHash": "PpZHL/Bt/8vQ8g/6LxweuI1EusV0ogUBYnGM+bPeL/SG89gx2n05xKNE/U5JNEkLFLL+sk7O8T7c/PXhFtUtUg=="
+      },
+      "Microsoft.IdentityModel.Protocols": {
+        "type": "Transitive",
+        "resolved": "6.15.1",
+        "contentHash": "6nHr+4yE8vj620Vy4L0pl7kmkvWc06wBrJ+AOo/gjqzu/UD/MYgySUqRGlZYrvvNmKkUWMw4hdn78MPCb4bstA==",
+        "dependencies": {
+          "Microsoft.IdentityModel.Logging": "6.15.1",
+          "Microsoft.IdentityModel.Tokens": "6.15.1"
+        }
+      },
+      "Microsoft.IdentityModel.Protocols.OpenIdConnect": {
+        "type": "Transitive",
+        "resolved": "6.15.1",
+        "contentHash": "WwecgT/PNrytLNUWjkYtnnG2LXMAzkINSaZM+8dPPiEpOGz1bQDBWAenTSurYICxGoA1sOPriFXk+ocnQyprKw==",
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols": "6.15.1",
+          "System.IdentityModel.Tokens.Jwt": "6.15.1"
+        }
+      },
+      "Microsoft.IdentityModel.Tokens": {
+        "type": "Transitive",
+        "resolved": "6.15.1",
+        "contentHash": "0bd0ocKuNai0/GdhboIW37R6z8I0vFqlmiPeG055SJxPPJ7dfBo2tjJ3bPV9vjFCRDuusj24dldOsg4hWui6iw==",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "Microsoft.IdentityModel.Logging": "6.15.1",
+          "System.Security.Cryptography.Cng": "4.5.0"
+        }
+      },
       "Nanoid": {
         "type": "Transitive",
         "resolved": "3.0.0",
@@ -223,6 +277,20 @@
         "resolved": "6.5.0",
         "contentHash": "OvbvxX+wL8skxTBttcBsVxdh73Fag4xwqEU2edh4JMn7Ws/xJHnY/JB1e9RoCb6XpDxUF3hD9A0Z1lEUx40Pfw=="
       },
+      "System.IdentityModel.Tokens.Jwt": {
+        "type": "Transitive",
+        "resolved": "6.15.1",
+        "contentHash": "q3ZLyWmpX4+jW4XITf7Axd+9sC6w2NrQaKcQQT9A8waoknHgaNwSeookpUmPMQDqS0afT9Lh0JYub196vzuzbA==",
+        "dependencies": {
+          "Microsoft.IdentityModel.JsonWebTokens": "6.15.1",
+          "Microsoft.IdentityModel.Tokens": "6.15.1"
+        }
+      },
+      "System.Security.Cryptography.Cng": {
+        "type": "Transitive",
+        "resolved": "4.5.0",
+        "contentHash": "WG3r7EyjUe9CMPFSs6bty5doUqT+q9pbI80hlNzo2SkPkZ4VTuZkGWjpp77JB8+uaL4DFPRdBsAY+DX3dBK92A=="
+      },
       "System.Text.Json": {
         "type": "Transitive",
         "resolved": "4.7.2",
@@ -239,13 +307,17 @@
         }
       },
       "Checkout.PaymentGateway.Domain": {
-        "type": "Project"
+        "type": "Project",
+        "dependencies": {
+          "Ardalis.GuardClauses": "[4.1.1, )"
+        }
       },
       "Checkout.PaymentGateway.Infrastructure": {
         "type": "Project",
         "dependencies": {
           "Ardalis.GuardClauses": "[4.1.1, )",
           "Checkout.PaymentGateway.Application": "[1.0.0, )",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "[7.0.10, )",
           "Microsoft.Extensions.Configuration.Abstractions": "[7.0.0, )",
           "Microsoft.Extensions.Configuration.Binder": "[7.0.4, )",
           "Microsoft.Extensions.Http": "[7.0.0, )"

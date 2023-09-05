@@ -1,6 +1,13 @@
 {
   "version": 1,
   "dependencies": {
-    "net7.0": {}
+    "net7.0": {
+      "Ardalis.GuardClauses": {
+        "type": "Direct",
+        "requested": "[4.1.1, )",
+        "resolved": "4.1.1",
+        "contentHash": "+UcJ2s+gf2wMNrwadCaHZV2DMcGgBU1t22A+jm40P4MHQRLy9hcleGy5xdVWd4dXZPa5Vlp4TG5xU2rhoDYrBA=="
+      }
+    }
   }
 }

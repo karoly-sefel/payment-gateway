@@ -1,5 +1,8 @@
 using System.Net;
+using Checkout.PaymentGateway.Api.Authorization;
+using Checkout.PaymentGateway.Api.Specs.Authentication;
 using Checkout.PaymentGateway.Api.Specs.Context;
+using Checkout.PaymentGateway.Api.Specs.Fakes;
 using Checkout.PaymentGateway.Api.Specs.Http;
 using Checkout.PaymentGateway.Application.Payments.Queries;
 using Microsoft.AspNetCore.Http;
@@ -25,7 +28,8 @@ public class RetrievePaymentSteps
     [Given(@"a merchant")]
     public void GivenAMerchant()
     {
-        // noop for now
+        _context.Merchants.Add(new MerchantData{ MerchantId = "merchantA"});
+        _context.MerchantId = "merchantA";
     }
 
     [Given(@"a payment")]
@@ -72,5 +76,6 @@ public class RetrievePaymentSteps
         problemDetails.Should().BeEquivalentTo(expectedResponse, opt => opt.Excluding(details => details.Extensions));
     }
 
-    private Task GetPaymentDetails(string paymentId) => _httpClient.Get($"/v1/payments/{paymentId}");
+    private Task GetPaymentDetails(string paymentId) => _httpClient.Get($"/v1/payments/{paymentId}",
+        bearerToken: JwtTokenGenerator.GenerateToken(_context.MerchantId, new []{ Scopes.PaymentRead }));
 }

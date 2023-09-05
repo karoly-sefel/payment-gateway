@@ -13,10 +13,10 @@ public class RetrievePaymentQueryHandler : IRequestHandler<RetrievePaymentQuery,
 
     public async Task<Maybe<PaymentDto>> Handle(RetrievePaymentQuery query, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Finding payment details for id: {PaymentId}", query.PaymentId);
+        _logger.LogInformation("Finding payment details for id: {PaymentId} merchant: {MerchantId}", query.PaymentId, query.MerchantId);
 
         PaymentId paymentId = PaymentId.From(query.PaymentId);
-        Maybe<PaymentDto> payment = await _payments.GetById(paymentId, cancellationToken);
+        Maybe<PaymentDto> payment = await _payments.GetById(paymentId, query.MerchantId, cancellationToken);
 
         return payment;
     }

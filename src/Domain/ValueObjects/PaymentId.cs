@@ -19,4 +19,6 @@ public record PaymentId
     }
 
     private static bool IsValid(string paymentId) => !string.IsNullOrEmpty(paymentId) && paymentId.Length.IsBetweenInclusive(MinLength, MaxLength);
+
+    public override string ToString() => Value;
 };

@@ -35,3 +35,4 @@ For detailed information about project requirements and development guidelines, 
 - [Development](docs/development.md)
 - [Solution Structure](docs/solution-structure.md)
 - [API Documentation](docs/api-documentation.md)
+- [Authentication/Authorization](docs/authorization.md)

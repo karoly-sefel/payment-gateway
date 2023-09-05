@@ -1,5 +1,7 @@
 using Asp.Versioning.Builder;
+using Checkout.PaymentGateway.Api.Authorization;
 using Checkout.PaymentGateway.Api.Endpoints.Examples;
+using Checkout.PaymentGateway.Api.Merchants;
 using Checkout.PaymentGateway.Application.Payments.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Filters;
@@ -23,13 +25,14 @@ public static class RetrievePaymentEndpoint
                 var parameter = generatedOperation.Parameters[0];
                 parameter.Description = "Payment ID";
                 return generatedOperation;
-            });
+            })
+            .RequireAuthorization(Scopes.PaymentRead);
 
     [SwaggerResponseExample(StatusCodes.Status200OK, typeof(RetrievePaymentResponseExample))]
     [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(RetrievePaymentResponse404Example))]
-    private static async Task<IResult> Handle(string id, [FromServices]IMediator mediator, HttpContext httpContext, CancellationToken cancelToken)
+    private static async Task<IResult> Handle(string id, [FromServices]MerchantIdAccessor merchant, [FromServices]IMediator mediator, HttpContext httpContext, CancellationToken cancelToken)
     {
-        Maybe<PaymentDto> payment = await mediator.Send(new RetrievePaymentQuery(id), cancelToken);
+        Maybe<PaymentDto> payment = await mediator.Send(new RetrievePaymentQuery(id, merchant.CurrentMerchant), cancelToken);
 
         return payment.Match(
             dto => Results.Json(dto, contentType: "application/json"),

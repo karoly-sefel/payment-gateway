@@ -28,7 +28,7 @@ Retrieve details of a previously made payment by providing the payment ID.
 ```json
 {
   "paymentId": "1234567890",
-  "maskedCardNumber": "**** **** **** 1234",
+  "maskedCardNumber": "**** **** **** 1234"
 }
 ```
 
@@ -122,3 +122,15 @@ Process a payment by providing payment details.
     "detail": "An unexpected error occurred during payment processing."
 }
 ```
+
+## Authentication
+
+API calls require a JWT Bearer token that needs to be included in calls to the endpoints above.
+
+The acquired token should be included as an HTTP request header in the following format with the `JWT_TOKEN` placeholder 
+replaced with the actual token.
+
+`Authorization: Bearer JWT_TOKEN`
+
+Read [Authorization](authorization.md) for more details and see examples in [payment-gateway.http](../tools/payment-gateway.http)
+

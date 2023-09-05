@@ -7,4 +7,6 @@ public enum PaymentErrorReason
     Unknown,
     InsufficientFunds,
     ExpiredCard,
+    MerchantNotFound,
+    MerchantAccountClosed,
 }

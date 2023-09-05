@@ -1,6 +1,7 @@
 ### Retreive payment - existing
 
 GET {{baseUrl}}/v1/payments/abc1234
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ikthcm9seSIsInN1YiI6Ikthcm9seSIsImp0aSI6IjcwNjZkOGU3Iiwic2NvcGUiOlsicGF5bWVudDpyZWFkIiwicGF5bWVudDpwcm9jZXNzIl0sIm1lcmNoYW50SWQiOiJtZXJjaDAwMDEiLCJhdWQiOlsiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAwMSJdLCJuYmYiOjE2OTM5MDc5NTYsImV4cCI6MTg5MzQ1NjAwMCwiaWF0IjoxNjkzOTA3OTU3LCJpc3MiOiJkb3RuZXQtdXNlci1qd3RzIn0.XY8L9Kzvx-flBHqoCFSK1dT6Un3qO-eZn9kLN_26754
 
 ### Retreive payment - non-existing
 

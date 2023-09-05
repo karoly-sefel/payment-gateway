@@ -1,6 +1,8 @@
 ﻿using BoDi;
+using Checkout.PaymentGateway.Api.Specs.Authentication;
 using Checkout.PaymentGateway.Api.Specs.Context;
 using Checkout.PaymentGateway.Api.Specs.Fakes;
+using Checkout.PaymentGateway.Application.Merchants;
 using Checkout.PaymentGateway.Application.Payments.Queries;
 using Checkout.PaymentGateway.Application.Services;
 using Microsoft.AspNetCore.Hosting;
@@ -31,9 +33,15 @@ public class Application : WebApplicationFactory<Program>
     {
         builder.UseSetting("AcquiringBank:BaseUrl", "https://test-bank.com");
 
+        builder.UseSetting("Authentication:DefaultScheme", "Bearer");
+        builder.UseSetting("Authentication:Schemes:Bearer:ValidAudiences:0", JwtTokenGenerator.Audience);
+        builder.UseSetting("Authentication:Schemes:Bearer:ValidIssuer", JwtTokenGenerator.Issuer);
+        builder.UseSetting("Authentication:Schemes:Bearer:ValidateIssuer", "false");
+
         builder.ConfigureTestServices(services =>
         {
             services.Replace(ServiceDescriptor.Singleton<IPaymentRepository, FakePaymentRepository>());
+            services.Replace(ServiceDescriptor.Singleton<IMerchantRepository, FakeMerchantRepository>());
             services.Replace(ServiceDescriptor.Singleton<IPaymentIdGenerator>(_ => _objectContainer.Resolve<SequentialPaymentIdGenerator>()));
             services.AddTransient(_ => _objectContainer.Resolve<PaymentContext>());
 
