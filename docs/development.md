@@ -3,8 +3,11 @@
 ## Prerequisites
 
 - JetBrains Rider 2023.1+ (recommended) or Visual Studio 2022
+  - SpecFlow Plugin for Rider: https://plugins.jetbrains.com/plugin/15957-specflow-for-rider 
+  - SpecFlow Plugin for Visual Studio: https://marketplace.visualstudio.com/items?itemName=TechTalkSpecFlowTeam.SpecFlowForVisualStudio2022 
 - .NET 7 SDK
 - Docker Desktop 4.20.1+
+- PowerShell Core 7+
 
 ## Run / Debug
 

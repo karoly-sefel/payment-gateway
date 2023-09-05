@@ -14,9 +14,24 @@ Merchants can easily initiate and validate payment transactions, receiving real-
 ### Payment Retrieval
 Retrieve detailed information about previously made payments, facilitating reconciliation and reporting needs.
 
+## Solution Organization
+The solution is organized as follows:
+
+```
+├───.github           # GitHub Actions workflows and related files.
+├───docs              # Documentation files, including requirements, development guidelines, and API documentation.
+├───scripts           # Scripts for building, running, and testing the project.
+├───src               # Source code files for the Payment Gateway application.
+│   └───PaymentGateway.sln   # Visual Studio solution file.
+├───tools             # Tools and utilities related to the project.
+├───README.md         # The main README file providing an overview of the project.
+
+```
+
 ## Documentation
 For detailed information about project requirements and development guidelines, refer to the documentation on the links below:
 
 - [Requirements](docs/requirements.md)
 - [Development](docs/development.md)
+- [Solution Structure](docs/solution-structure.md)
 - [API Documentation](docs/api-documentation.md)
