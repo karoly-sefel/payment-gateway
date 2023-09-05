@@ -1,8 +1,8 @@
 using Checkout.PaymentGateway.Api.Specs.Context;
 using Checkout.PaymentGateway.Application.Payments.Queries;
+using Checkout.PaymentGateway.Domain.Entities;
 using Checkout.PaymentGateway.Domain.ValueObjects;
 using CSharpFunctionalExtensions;
-using static CSharpFunctionalExtensions.Maybe;
 
 namespace Checkout.PaymentGateway.Api.Specs.Fakes;
 
@@ -12,13 +12,18 @@ public class FakePaymentRepository : IPaymentRepository
 
     public FakePaymentRepository(PaymentContext context) => _context = context;
 
-    public Task<Maybe<PaymentDto>> GetById(PaymentId paymentId, MerchantId merchantId, CancellationToken cancellationToken)
+    public Task<Maybe<Transaction>> GetById(PaymentId paymentId, MerchantId merchantId, CancellationToken cancellationToken)
     {
-        Maybe<PaymentDto> payment = None;
+        Transaction? transaction = _context.Transactions
+            .Where(t => t.PaymentId == paymentId && t.MerchantId == merchantId)
+            .MaxBy(t => t.UpdatedOn);
 
-        if (_context.CurrentPayment?.PaymentId == paymentId.Value && _context.MerchantId == merchantId.Value)
-            payment = _context.CurrentPayment;
+        return Task.FromResult(Maybe<Transaction>.From(transaction!));
+    }
 
-        return Task.FromResult(payment);
+    public Task RecordTransaction(Transaction transaction, CancellationToken cancellationToken)
+    {
+        _context.Transactions.Add(transaction);
+        return Task.CompletedTask;
     }
 }

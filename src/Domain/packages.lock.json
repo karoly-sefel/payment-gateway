@@ -7,6 +7,12 @@
         "requested": "[4.1.1, )",
         "resolved": "4.1.1",
         "contentHash": "+UcJ2s+gf2wMNrwadCaHZV2DMcGgBU1t22A+jm40P4MHQRLy9hcleGy5xdVWd4dXZPa5Vlp4TG5xU2rhoDYrBA=="
+      },
+      "CSharpFunctionalExtensions": {
+        "type": "Direct",
+        "requested": "[2.40.0, )",
+        "resolved": "2.40.0",
+        "contentHash": "Xo3BSUMuRCSp4/SeTn0G/ZgahCNXzrh28gprzYpqPPKisDbXqGQeDumhnrlhUSMHVyatXJniezuO7W8vPHt3Ww=="
       }
     }
   }

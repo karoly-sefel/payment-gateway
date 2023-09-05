@@ -24,14 +24,15 @@ public static class ProcessPaymentEndpoint
             .RequireAuthorization(Scopes.PaymentProcess);
 
     [SwaggerRequestExample(typeof(PaymentRequest), typeof(ProcessPaymentRequest201Example))]
-    private static async Task<IResult> Handle([FromBody]PaymentRequest paymentRequest, [FromServices]MerchantIdAccessor merchantIdAccessor, [FromServices]IMediator mediator, HttpContext httpContext, CancellationToken cancelToken)
+    private static async Task<IResult> Handle([FromBody]PaymentRequest paymentRequest, [FromServices]MerchantIdAccessor merchantIdAccessor,
+        [FromServices]IMediator mediator, HttpContext httpContext, CancellationToken cancelToken)
     {
         MerchantId merchantId = merchantIdAccessor.CurrentMerchant;
         Result<ProcessPaymentResponse, PaymentError> result = await mediator.Send(new ProcessPaymentCommand(paymentRequest, merchantId), cancelToken);
 
         return result.Match(
             response => Results.Created($"/v1/payments/{response.PaymentId}", response),
-            error => Results.UnprocessableEntity(error.Reason)
+            error => PaymentErrorResponses.MapToProblemDetailsResponse(error, httpContext)
         );
     }
 }

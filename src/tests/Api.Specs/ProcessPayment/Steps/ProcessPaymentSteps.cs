@@ -1,12 +1,15 @@
 using System.Net;
+using System.Net.Http.Json;
 using Checkout.PaymentGateway.Api.Authorization;
 using Checkout.PaymentGateway.Api.Specs.Authentication;
 using Checkout.PaymentGateway.Api.Specs.Context;
 using Checkout.PaymentGateway.Api.Specs.Fakes;
 using Checkout.PaymentGateway.Api.Specs.Http;
+using Checkout.PaymentGateway.Application.AcquiringBank.Data;
 using Checkout.PaymentGateway.Application.Payments.Commands;
 using RichardSzalay.MockHttp;
 using TechTalk.SpecFlow;
+using PaymentRequest = Checkout.PaymentGateway.Application.Payments.Commands.PaymentRequest;
 
 namespace Checkout.PaymentGateway.Api.Specs.Steps;
 
@@ -28,23 +31,24 @@ public class ProcessPaymentSteps
     }
 
     [Given(@"the customer has insufficient balance on their credit card for the payment")]
-    public void GivenTheCustomerHasInsufficientBalanceOnTheirCreditCardForThePayment()
-    {
-        _http.When(HttpMethod.Post, "/take-payment")
-            .Respond(_ => new HttpResponseMessage(HttpStatusCode.UnprocessableEntity));
-    }
+    public void GivenTheCustomerHasInsufficientBalanceOnTheirCreditCardForThePayment() =>
+        ConfigureBankResponse(new PaymentResponse(PaymentStatus.Declined, PaymentResult.InsufficientFunds));
 
     [Given(@"the customer has sufficient balance on their credit card for the payment")]
-    public void GivenTheCustomerHasSufficientBalanceOnTheirCreditCardForThePayment()
-    {
+    public void GivenTheCustomerHasSufficientBalanceOnTheirCreditCardForThePayment() =>
+        ConfigureBankResponse(new PaymentResponse(PaymentStatus.Approved, PaymentResult.Success));
+
+    private void ConfigureBankResponse(PaymentResponse response) =>
         _http.When(HttpMethod.Post, "/api/process-payment")
-            .Respond(_ => new HttpResponseMessage(HttpStatusCode.OK));
-    }
+            .Respond(_ => new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = JsonContent.Create(response)
+            });
 
     [When(@"a request is made to the ProcessPayment endpoint")]
     public async Task WhenARequestIsMadeToTheProcessPaymentEndpoint() =>
         await ProcessPayment(new PaymentRequest(
-            "123",
+            "1111 1111 1111 1234",
             11,
             2028,
             100000,
@@ -56,7 +60,7 @@ public class ProcessPaymentSteps
     public async Task ThenTheResponseIncludesThePaymentIdForTheCurrentTransaction()
     {
         ProcessPaymentResponse response = await _httpClient.GetLatestResponse<ProcessPaymentResponse>();
-        response.Should().BeEquivalentTo(new ProcessPaymentResponse(_idGenerator.LastId!.Value));
+        response.Should().BeEquivalentTo(new ProcessPaymentResponse(_idGenerator.LastId!.Value, "Success", "Processed"));
     }
 
     private Task ProcessPayment(PaymentRequest request) =>

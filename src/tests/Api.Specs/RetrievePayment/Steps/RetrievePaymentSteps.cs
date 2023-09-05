@@ -5,6 +5,8 @@ using Checkout.PaymentGateway.Api.Specs.Context;
 using Checkout.PaymentGateway.Api.Specs.Fakes;
 using Checkout.PaymentGateway.Api.Specs.Http;
 using Checkout.PaymentGateway.Application.Payments.Queries;
+using Checkout.PaymentGateway.Domain.Entities;
+using Checkout.PaymentGateway.Domain.ValueObjects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TechTalk.SpecFlow;
@@ -35,7 +37,17 @@ public class RetrievePaymentSteps
     [Given(@"a payment")]
     public void GivenAPayment()
     {
-        _context.CurrentPayment = new PaymentDto("abc1234", "**** **** **** 1234");
+        _context.Transactions.Add(new Transaction(
+            MerchantId.From("merchantA"),
+            PaymentId.From("abc1234"),
+            new PaymentCard("1111 1111 1111 1234", 2028, 12, "123"),
+            new PaymentAmount(50000, "EUR"),
+            TransactionStatus.Success,
+            new DateTime(2023, 09, 01, 12, 30, 00),
+            new DateTime(2023, 09, 01, 12, 35, 00)
+        ));
+
+        _context.CurrentPayment = new PaymentDto("abc1234", "************1234", 50000, "EUR", "Success");
     }
 
     [When(@"the merchant requests the details of the payment")]
@@ -52,7 +64,8 @@ public class RetrievePaymentSteps
     public async void ThenThePaymentDetailsAreReturned()
     {
         PaymentDto expectedPayment = _context.CurrentPayment!;
-        PaymentDto? response = await _httpClient.GetLatestResponse<PaymentDto>();
+        PaymentDto response = await _httpClient.GetLatestResponse<PaymentDto>();
+
         response
             .Should().NotBeNull()
             .And.Subject

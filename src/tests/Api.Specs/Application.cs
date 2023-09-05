@@ -5,7 +5,7 @@ using Checkout.PaymentGateway.Api.Specs.Fakes;
 using Checkout.PaymentGateway.Api.Specs.Http;
 using Checkout.PaymentGateway.Application.Merchants;
 using Checkout.PaymentGateway.Application.Payments.Queries;
-using Checkout.PaymentGateway.Application.Services;
+using Checkout.PaymentGateway.Application.Payments.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;

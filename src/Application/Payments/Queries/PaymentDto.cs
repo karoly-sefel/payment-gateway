@@ -2,5 +2,8 @@ namespace Checkout.PaymentGateway.Application.Payments.Queries;
 
 public record PaymentDto(
     string PaymentId,
-    string MaskedCardNumber
+    string MaskedCardNumber,
+    int Amount,
+    string Currency,
+    string Status
 );

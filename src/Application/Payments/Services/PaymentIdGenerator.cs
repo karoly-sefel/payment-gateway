@@ -1,13 +1,13 @@
 using Checkout.PaymentGateway.Domain.ValueObjects;
 using NanoidDotNet;
 
-namespace Checkout.PaymentGateway.Application.Services;
+namespace Checkout.PaymentGateway.Application.Payments.Services;
 
 public class PaymentIdGenerator : IPaymentIdGenerator
 {
-    public async Task<PaymentId> Generate()
+    public PaymentId Generate()
     {
-        string id = await Nanoid.GenerateAsync(size: 12);
+        string id = Nanoid.Generate(size: 12);
         return PaymentId.From(id);
     }
 }

@@ -30,26 +30,14 @@ public static class RetrievePaymentEndpoint
 
     [SwaggerResponseExample(StatusCodes.Status200OK, typeof(RetrievePaymentResponseExample))]
     [SwaggerResponseExample(StatusCodes.Status404NotFound, typeof(RetrievePaymentResponse404Example))]
-    private static async Task<IResult> Handle(string id, [FromServices]MerchantIdAccessor merchant, [FromServices]IMediator mediator, HttpContext httpContext, CancellationToken cancelToken)
+    private static async Task<IResult> Handle(string id, [FromServices] MerchantIdAccessor merchant, [FromServices] IMediator mediator, HttpContext httpContext,
+        CancellationToken cancelToken)
     {
-        Maybe<PaymentDto> payment = await mediator.Send(new RetrievePaymentQuery(id, merchant.CurrentMerchant), cancelToken);
+        Result<PaymentDto, RetrievePaymentError> payment = await mediator.Send(new RetrievePaymentQuery(id, merchant.CurrentMerchant), cancelToken);
 
         return payment.Match(
-            dto => Results.Json(dto, contentType: "application/json"),
-            () => PaymentNotFound(id, httpContext)
+            data => Results.Json(data, contentType: "application/json"),
+            error => ErrorResponses.MapToProblemDetailsResponse(error, httpContext)
         );
     }
-
-    private static IResult PaymentNotFound(string paymentId, HttpContext context) =>
-        Results.Problem(
-            detail: "No payment record can be found with the given id",
-            instance: context.Request.Path,
-            title: "Payment not found",
-            type: "https://httpstatuses.com/404",
-            statusCode: StatusCodes.Status404NotFound,
-            extensions: new Dictionary<string, object?>
-            {
-                { "paymentId", paymentId }
-            }
-        );
 }

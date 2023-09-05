@@ -1,4 +1,4 @@
-using Checkout.PaymentGateway.Application.Services;
+using Checkout.PaymentGateway.Application.Payments.Services;
 using Checkout.PaymentGateway.Domain.ValueObjects;
 
 namespace Checkout.PaymentGateway.Api.Specs.Fakes;
@@ -10,11 +10,11 @@ public class SequentialPaymentIdGenerator : IPaymentIdGenerator
 
     public PaymentId? LastId { get; private set; }
 
-    public Task<PaymentId> Generate()
+    public PaymentId Generate()
     {
         string id = _nextId.ToString();
         LastId = PaymentId.From(id.PadLeft(IdLength - id.Length, 'a'));
         _nextId++;
-        return Task.FromResult(LastId);
+        return LastId;
     }
 }

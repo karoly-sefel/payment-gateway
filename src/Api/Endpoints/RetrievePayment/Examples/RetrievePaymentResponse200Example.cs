@@ -5,5 +5,11 @@ namespace Checkout.PaymentGateway.Api.Endpoints.Examples;
 
 public class RetrievePaymentResponseExample  : IExamplesProvider<PaymentDto>
 {
-    public PaymentDto GetExamples() => new("abc1234", "**** **** **** 1234");
+    public PaymentDto GetExamples() => new(
+        "abc1234",
+        "**** **** **** 1234",
+        100000,
+        "EUR",
+        "Success"
+    );
 }

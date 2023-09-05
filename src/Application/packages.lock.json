@@ -48,7 +48,8 @@
       "Checkout.PaymentGateway.Domain": {
         "type": "Project",
         "dependencies": {
-          "Ardalis.GuardClauses": "[4.1.1, )"
+          "Ardalis.GuardClauses": "[4.1.1, )",
+          "CSharpFunctionalExtensions": "[2.40.0, )"
         }
       }
     }
