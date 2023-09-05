@@ -2,6 +2,7 @@
 using Checkout.PaymentGateway.Api.Specs.Authentication;
 using Checkout.PaymentGateway.Api.Specs.Context;
 using Checkout.PaymentGateway.Api.Specs.Fakes;
+using Checkout.PaymentGateway.Api.Specs.Http;
 using Checkout.PaymentGateway.Application.Merchants;
 using Checkout.PaymentGateway.Application.Payments.Queries;
 using Checkout.PaymentGateway.Application.Services;
@@ -45,18 +46,24 @@ public class Application : WebApplicationFactory<Program>
             services.Replace(ServiceDescriptor.Singleton<IPaymentIdGenerator>(_ => _objectContainer.Resolve<SequentialPaymentIdGenerator>()));
             services.AddTransient(_ => _objectContainer.Resolve<PaymentContext>());
 
-            var mockHttpMessageHandler = new MockHttpMessageHandler();
-            _objectContainer.RegisterFactoryAs(_ => mockHttpMessageHandler).InstancePerContext();
-
-            services.Replace(ServiceDescriptor.Transient<HttpClient>(_ =>
-            {
-                var client = mockHttpMessageHandler.ToHttpClient();
-                client.BaseAddress = new Uri("https://test-bank.com");
-                return client;
-            }));
+            RegisterMockHttpClient(services);
         });
 
         base.ConfigureWebHost(builder);
+    }
+
+    private void RegisterMockHttpClient(IServiceCollection services)
+    {
+        var mockHttpMessageHandler = new MockHttpMessageHandler();
+        _objectContainer.RegisterFactoryAs(_ => mockHttpMessageHandler).InstancePerContext();
+
+        var client = mockHttpMessageHandler.ToHttpClient();
+        client.BaseAddress = new Uri("https://test-bank.com");
+
+        services.RemoveAll<HttpClient>();
+        services.Add(ServiceDescriptor.Transient<HttpClient>(_ => client));
+
+        services.Replace(ServiceDescriptor.Singleton<IHttpClientFactory>(_ => new HttpClientFactoryStub(client)));
     }
 
     protected override IHost CreateHost(IHostBuilder builder)

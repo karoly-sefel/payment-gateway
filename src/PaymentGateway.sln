@@ -1,16 +1,30 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{24AD4DAF-4416-4B6E-AACB-DCECC8A9023F}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{24AD4DAF-4416-4B6E-AACB-DCECC8A9023F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6038B550-0E0B-46F2-BCD1-5D637E7C0312}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{9235F97E-7933-4C77-8F0F-FCC709C7A08C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{9235F97E-7933-4C77-8F0F-FCC709C7A08C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{BF1AE023-C103-4FD4-A4D2-D5BF1BAFFF80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{BF1AE023-C103-4FD4-A4D2-D5BF1BAFFF80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{56A4AE1B-51D8-4246-A136-C7C654DC2F83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{56A4AE1B-51D8-4246-A136-C7C654DC2F83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.Specs", "tests\Api.Specs\Api.Specs.csproj", "{1FFDD879-95C8-43EC-850A-F03ACB94B80F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Specs", "tests\Api.Specs\Api.Specs.csproj", "{1FFDD879-95C8-43EC-850A-F03ACB94B80F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bankSimulator", "bankSimulator", "{D33498D3-4300-444D-925F-EC0E7FC2E6D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankSimulator", "BankSimulator\BankSimulator.csproj", "{E285DEE0-8A36-4ECC-AE45-66BF25624544}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "http", "http", "{18151BB0-8022-474F-B4E4-B717398D4973}"
+	ProjectSection(SolutionItems) = preProject
+		..\tools\bank-simulator.http = ..\tools\bank-simulator.http
+		..\tools\http-client.env.json = ..\tools\http-client.env.json
+		..\tools\payment-gateway.http = ..\tools\payment-gateway.http
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,8 +52,16 @@ Global
 		{1FFDD879-95C8-43EC-850A-F03ACB94B80F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FFDD879-95C8-43EC-850A-F03ACB94B80F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FFDD879-95C8-43EC-850A-F03ACB94B80F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E285DEE0-8A36-4ECC-AE45-66BF25624544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E285DEE0-8A36-4ECC-AE45-66BF25624544}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E285DEE0-8A36-4ECC-AE45-66BF25624544}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E285DEE0-8A36-4ECC-AE45-66BF25624544}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1FFDD879-95C8-43EC-850A-F03ACB94B80F} = {6038B550-0E0B-46F2-BCD1-5D637E7C0312}
+		{E285DEE0-8A36-4ECC-AE45-66BF25624544} = {D33498D3-4300-444D-925F-EC0E7FC2E6D2}
 	EndGlobalSection
 EndGlobal

@@ -28,6 +28,8 @@ In this example, the generated JWT token includes the following:
 - Expiration date set to `'2030-01-01'`.
 - A custom claim `merchantId` with the value `merchantA`.
 
+To learn more about `dotnet user-jwts` check out its documentation: [Manage JSON Web Tokens in development with dotnet user-jwts](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/jwt-authn?view=aspnetcore-7.0&tabs=windows)
+
 Please note that in a production environment, JWT tokens should be issued by a trusted authentication service or Identity Provider (IdP) 
 following standard authentication protocols such as OAuth 2.0 or OpenID Connect. The provided development command is for testing and development purposes only.
 

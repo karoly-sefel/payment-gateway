@@ -18,7 +18,7 @@ public static class HttpClientConfigurator
             return new AcquiringBankConfig { BaseUrl = baseUrl };
         });
 
-        services.AddHttpClient<AcquiringBankClient>((serviceProvider, client) =>
+        services.AddHttpClient<IAcquiringBankClient, AcquiringBankClient>((serviceProvider, client) =>
         {
             AcquiringBankConfig config = serviceProvider.GetRequiredService<AcquiringBankConfig>();
             client.BaseAddress = new Uri(config.BaseUrl);

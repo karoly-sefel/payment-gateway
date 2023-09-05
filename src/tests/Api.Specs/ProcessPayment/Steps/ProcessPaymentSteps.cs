@@ -37,7 +37,7 @@ public class ProcessPaymentSteps
     [Given(@"the customer has sufficient balance on their credit card for the payment")]
     public void GivenTheCustomerHasSufficientBalanceOnTheirCreditCardForThePayment()
     {
-        _http.When(HttpMethod.Post, "/take-payment")
+        _http.When(HttpMethod.Post, "/api/process-payment")
             .Respond(_ => new HttpResponseMessage(HttpStatusCode.OK));
     }
 

@@ -1,0 +1,129 @@
+### Health check
+
+GET {{bankBaseUrl}}
+
+### Successful payment
+
+POST {{bankBaseUrl}}/api/process-payment
+Content-Type: application/json
+
+{
+    "merchantId": "merchantA",
+    "transactionId": "000000001",
+    "amount": 1500,
+    "currency": "GBP",
+    "paymentCard": {
+        "cardNumber": "1234 5678 9012 1345",
+        "expiryMonth": 12,
+        "expiryYear": 2028,
+        "cvv": 123
+    }
+}
+
+### Declined payment - insufficient funds
+
+POST {{bankBaseUrl}}/api/process-payment
+Content-Type: application/json
+
+{
+    "merchantId": "merchantA",
+    "transactionId": "000000001",
+    "amount": 3000000,
+    "currency": "DKK",
+    "paymentCard": {
+        "cardNumber": "1234567890121345",
+        "expiryMonth": 12,
+        "expiryYear": 2028,
+        "cvv": 123
+    }
+}
+
+### Declined payment - expired card
+
+POST {{bankBaseUrl}}/api/process-payment
+Content-Type: application/json
+
+{
+    "merchantId": "merchantA",
+    "transactionId": "000000001",
+    "amount": 1000,
+    "currency": "EUR",
+    "paymentCard": {
+        "cardNumber": "1234567890121345",
+        "expiryMonth": 12,
+        "expiryYear": 2022,
+        "cvv": 123
+    }
+}
+
+### Declined payment - security violation
+
+POST {{bankBaseUrl}}/api/process-payment
+Content-Type: application/json
+
+{
+    "merchantId": "merchantA",
+    "transactionId": "000000001",
+    "amount": 1000,
+    "currency": "EUR",
+    "paymentCard": {
+        "cardNumber": "4556253752712245",
+        "expiryMonth": 6,
+        "expiryYear": 2030,
+        "cvv": 123
+    }
+}
+
+### Declined payment - lost card
+
+POST {{bankBaseUrl}}/api/process-payment
+Content-Type: application/json
+
+{
+    "merchantId": "merchantA",
+    "transactionId": "000000001",
+    "amount": 1000,
+    "currency": "EUR",
+    "paymentCard": {
+        "cardNumber": "4941202060999329",
+        "expiryMonth": 6,
+        "expiryYear": 2030,
+        "cvv": 123
+    }
+}
+
+### Pending payment - 3DS authorization required
+
+POST {{bankBaseUrl}}/api/process-payment
+Content-Type: application/json
+
+{
+    "merchantId": "merchantA",
+    "transactionId": "000000001",
+    "amount": 1000,
+    "currency": "EUR",
+    "paymentCard": {
+        "cardNumber": "4500622868341387",
+        "expiryMonth": 6,
+        "expiryYear": 2030,
+        "cvv": 123
+    }
+}
+
+### Declined payment - account transaction limit exceeded
+
+POST {{bankBaseUrl}}/api/process-payment
+Content-Type: application/json
+
+{
+    "merchantId": "merchantA",
+    "transactionId": "000000001",
+    "amount": 1000,
+    "currency": "EUR",
+    "paymentCard": {
+        "cardNumber": "4556294593757189",
+        "expiryMonth": 6,
+        "expiryYear": 2030,
+        "cvv": 123
+    }
+}

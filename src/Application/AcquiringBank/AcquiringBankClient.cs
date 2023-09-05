@@ -14,7 +14,7 @@ public class AcquiringBankClient : IAcquiringBankClient
     {
         Data.PaymentRequest data = Map(paymentRequest);
 
-        HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/take-payment", data, cancellationToken);
+        HttpResponseMessage response = await _httpClient.PostAsJsonAsync("/api/process-payment", data, cancellationToken);
 
         if (response.IsSuccessStatusCode)
             return BankPaymentResult.Success;

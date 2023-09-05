@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="API + Bank Simulator" type="CompoundRunConfigurationType">
+    <toRun name="Api: https" type="LaunchSettings" />
+    <toRun name="BankSimulator: https" type="LaunchSettings" />
+    <method v="2" />
+  </configuration>
+</component>
