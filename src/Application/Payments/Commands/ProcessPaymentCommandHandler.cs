@@ -58,7 +58,7 @@ public class ProcessPaymentCommandHandler : IRequestHandler<ProcessPaymentComman
 
         return new ProcessPaymentResponse(
             transaction.PaymentId.Value,
-            updatedTransaction.Status.ToString("G"),
+            updatedTransaction.Status,
             updatedTransaction.Error?.ToString("G") ?? "Processed"
         );
     }

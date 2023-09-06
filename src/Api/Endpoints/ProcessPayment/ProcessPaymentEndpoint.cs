@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Filters;
 using IResult = Microsoft.AspNetCore.Http.IResult;
 using static Checkout.PaymentGateway.Api.Http.ContentTypes;
+using PaymentRequest = Checkout.PaymentGateway.Application.Payments.Commands.PaymentRequest;
 
 namespace Checkout.PaymentGateway.Api.Endpoints;
 
@@ -18,8 +19,10 @@ public static class ProcessPaymentEndpoint
         app.MapPost("/v{version:apiVersion}/payments", Handle)
             .WithSummary("Process payment")
             .WithTags("Payments")
-            .Produces(StatusCodes.Status201Created)
+            .Produces<ProcessPaymentResponse>(StatusCodes.Status201Created)
+            .Produces<ProcessPaymentResponse>(StatusCodes.Status202Accepted)
             .ProducesProblem(StatusCodes.Status400BadRequest, ProblemDetailsJson)
+            .ProducesProblem(StatusCodes.Status422UnprocessableEntity, ProblemDetailsJson)
             .ProducesProblem(StatusCodes.Status500InternalServerError, ProblemDetailsJson)
             .RequireAuthorization(Scopes.PaymentProcess);
 
@@ -31,8 +34,15 @@ public static class ProcessPaymentEndpoint
         Result<ProcessPaymentResponse, PaymentError> result = await mediator.Send(new ProcessPaymentCommand(paymentRequest, merchantId), cancelToken);
 
         return result.Match(
-            response => Results.Created($"/v1/payments/{response.PaymentId}", response),
+            MapSuccessResult,
             error => PaymentErrorResponses.MapToProblemDetailsResponse(error, httpContext)
         );
     }
+
+    private static IResult MapSuccessResult(ProcessPaymentResponse response) =>
+        response switch
+        {
+            { Status: TransactionStatus.Pending } => Results.Json(response, statusCode: StatusCodes.Status202Accepted),
+            _ => Results.Created($"/v1/payments/{response.PaymentId}", response)
+        };
 }

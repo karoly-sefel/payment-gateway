@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json;
 using Ardalis.GuardClauses;
+using Checkout.PaymentGateway.Api.Http;
 
 namespace Checkout.PaymentGateway.Api.Specs.Http;
 
