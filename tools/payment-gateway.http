@@ -26,3 +26,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6I
     "currency": "GBP",
     "cvv": "123"
 }
+
+### Process payment - acount activity amount exceeded
+
+POST {{baseUrl}}/v1/payments
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ikthcm9seSIsInN1YiI6Ikthcm9seSIsImp0aSI6ImQ5ZTFjZWI2Iiwic2NvcGUiOlsicGF5bWVudDpyZWFkIiwicGF5bWVudDpwcm9jZXNzIl0sIm1lcmNoYW50SWQiOiJtZXJjaGFudEEiLCJhdWQiOlsiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAwMSJdLCJuYmYiOjE2OTM5MTE0NjUsImV4cCI6MTg5MzQ1NjAwMCwiaWF0IjoxNjkzOTExNDY2LCJpc3MiOiJkb3RuZXQtdXNlci1qd3RzIn0.x1BJ5EAzumJmY5jtqgUJxYvda_kgerQrDbptN3wUPHg
+
+{
+    "cardNumber": "4556294593757189",
+    "expiryMonth": 8,
+    "expiryYear": 2025,
+    "amount": 102400,
+    "currency": "GBP",
+    "cvv": "123"
+}

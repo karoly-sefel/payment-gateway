@@ -13,9 +13,9 @@ This project follows the CQRS pattern using MediatR to delegate command and quer
 
 #### Key Components:
 
-API Endpoints: Define HTTP endpoints for various features.
-Configuration: Configure routing, middleware, and dependency injection.
-Program.cs: Configure application services and middleware.
+- API Endpoints: Define HTTP endpoints for various features.
+- Configuration: Configure routing, middleware, and dependency injection.
+- Program.cs: Configure application services and middleware.
 
 ### 2. Application Layer
 
@@ -23,8 +23,8 @@ The Application layer contains application-specific business logic and use cases
 It serves as an intermediate layer between the API and the core domain.
 The application layer supports issuing commands which affect the domain model and executing queries to get data.
 
-It acts as a single point of entry to the application. This is useful if you want to issue commands or execute
-queries from multiple clients.
+The Application layer acts as a single point of entry to the application. This is useful to support multiple clients to issue commands or execute
+queries, i.e. to issue the same command based on a message from a queue.
 
 #### Key Components:
 
@@ -34,7 +34,8 @@ queries from multiple clients.
 
 ### 3. Domain Layer
 
-The Domain project defines the core domain models and entities. It represents the fundamental concepts of the payment gateway system, including payment requests, transactions, and other domain-specific entities.
+The Domain project defines the core domain models and entities. It represents the fundamental concepts of the payment gateway system, 
+including payment requests, transactions, and other domain-specific entities.
 
 #### Key Components:
 
@@ -51,19 +52,24 @@ It is responsible for data storage, external integrations, and cross-cutting con
 
 - Repository Implementations: Implement data storage and retrieval.
 - External Service Integrations: Simulate or integrate with external services (e.g., a bank simulator).
-- Cross-Cutting Concerns: Implement aspects like logging, caching, and validation.
 
 ### 5. Api.Specs Project
    
 The Api.Specs project contains tests written using SpecFlow, which is a behavior-driven development (BDD) framework. 
 These tests validate the behavior and functionality of the API endpoints defined in the Api project.
+The project also contains unit test using the XUnit Framework.
 
 #### Key Components:
 
 - SpecFlow Feature Files: Define behavior scenarios in Gherkin language.
 - Step Definitions: Implement step definitions to execute scenarios.
 
-## Dependencies
+### 6. BankSimulator Project
+
+The BankSimulator project is a .NET minimal API to simulate an acquiring bank.
+The validation rules follow the strategy pattern to be able to easily add new rules.
+
+## Main Dependencies
 
 - [MediatR](https://github.com/jbogard/MediatR): Used for implementing the Mediator pattern and handling commands and queries.
 - [CSharpFunctionalExtensions](https://github.com/vkhorikov/CSharpFunctionalExtensions): Used for managing results and functional programming.

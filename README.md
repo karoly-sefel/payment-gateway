@@ -2,7 +2,7 @@
 
 <img src="docs/assets/icon.png" width="128" width="128">
 
-The Payment Gateway is an API based application that allows merchants to offer a way for their shoppers to pay for their product.
+The Payment Gateway is a HTTP REST API that allows merchants to offer a way for their shoppers to pay for their product.
 
 [![Run tests](https://github.com/karoly-sefel/payment-gateway/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/karoly-sefel/payment-gateway/actions/workflows/run-tests.yml)
 
@@ -34,5 +34,10 @@ For detailed information about project requirements and development guidelines, 
 - [Requirements](docs/requirements.md)
 - [Development](docs/development.md)
 - [Solution Structure](docs/solution-structure.md)
+- [Testing](docs/testing.md)
 - [API Documentation](docs/api-documentation.md)
 - [Authentication/Authorization](docs/authorization.md)
+- [Pipelines](docs/pipelines.md)
+- [Cloud Architecture](docs/cloud-architecture.md)
+- [Areas for improvement](docs/areas-for-improvement.md)
+- [Extra mile bonus points](docs/extra-mile.md)

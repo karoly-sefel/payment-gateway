@@ -45,7 +45,7 @@ issuer authentication should always be enabled to ensure the security and integr
 
 ### Token #1 - merchantA full access
 
-```json
+```text
 Expires On: 2030-01-01T00:00:00.0000000Z
 Scopes: payment:read, payment:process
 Custom Claims: [merchantId=merchantA]
@@ -55,17 +55,17 @@ Token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ikthcm9seSIsInN
 
 ### Token #2 - merchantB full access
 
-```json
+```text
 Expires On: 2030-01-01T00:00:00.0000000Z
 Scopes: payment:read, payment:process
 Custom Claims: [merchantId=merchantB]
 ```
 
-Token: ` eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ikthcm9seSIsInN1YiI6Ikthcm9seSIsImp0aSI6IjlhNmRhYzdmIiwic2NvcGUiOlsicGF5bWVudDpyZWFkIiwicGF5bWVudDpwcm9jZXNzIl0sIm1lcmNoYW50SWQiOiJtZXJjaGFudEIiLCJhdWQiOlsiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAwMSJdLCJuYmYiOjE2OTM5MTk1MzcsImV4cCI6MTg5MzQ1NjAwMCwiaWF0IjoxNjkzOTE5NTM4LCJpc3MiOiJkb3RuZXQtdXNlci1qd3RzIn0.UVyy-AvjCI0B1ir6i5sfl3Bk91mry0v3aPcXoxk7FOM`
+Token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ikthcm9seSIsInN1YiI6Ikthcm9seSIsImp0aSI6IjlhNmRhYzdmIiwic2NvcGUiOlsicGF5bWVudDpyZWFkIiwicGF5bWVudDpwcm9jZXNzIl0sIm1lcmNoYW50SWQiOiJtZXJjaGFudEIiLCJhdWQiOlsiaHR0cDovL2xvY2FsaG9zdDo1MDAwIiwiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAwMSJdLCJuYmYiOjE2OTM5MTk1MzcsImV4cCI6MTg5MzQ1NjAwMCwiaWF0IjoxNjkzOTE5NTM4LCJpc3MiOiJkb3RuZXQtdXNlci1qd3RzIn0.UVyy-AvjCI0B1ir6i5sfl3Bk91mry0v3aPcXoxk7FOM`
 
 ### Token #3 - merchant A read-only access
 
-```json
+```text
 Expires On: 2030-01-01T00:00:00.0000000Z
 Scopes: payment:read
 Custom Claims: [merchantId=merchantA]
